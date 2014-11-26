@@ -1,0 +1,21 @@
+html {font-family: 'Source Sans Pro', sans-serif;}
+p {font-weight:300; font-size:1.1em;}
+.bold {font-weight:400;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:300;}
+
+
+
+@media screen and (max-width: 768px) {
+	p {font-size:.9em;}
+}
+
+
+a:link, a:visited {
+	text-decoration:none;
+	color:white;
+	transition:color 400ms;
+	&:hover {
+		color:$orange;
+	}
+}

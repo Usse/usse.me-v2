@@ -1,0 +1,25 @@
+svg {
+  border: solid 1px #666;
+  overflow: hidden;
+}
+
+path {
+  fill: rgba(90,90,90,.8);
+  stroke: rgba(190,190,190,.3);
+  stroke-width: .4px;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #000;
+  pointer-events: none;
+  display:none;
+
+}
+
+.moved {
+	fill: rgba(255,90,90,.8);
+}
+
+
+#chart {position:absolute; top:0; z-index:300;}

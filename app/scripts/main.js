@@ -4,13 +4,14 @@ var USSE = USSE || {};
 
 
 USSE.navigation = USSE.navigation || (function() {
-		var $sections = $('section.panel'),
+		'use strict';
+		var $sections = $('section.block'),
 				$pageHeight = $(window).outerHeight();
 
 		function init() {
 			window.scrollTo(0, 1);
 			setHeight();
-		};
+		}
 		function resize() {
 			$pageHeight = $(window).outerHeight();
 			setHeight();
@@ -19,13 +20,13 @@ USSE.navigation = USSE.navigation || (function() {
 			if (!Modernizr.mq('only screen and (max-width:768px)')) {
 				$sections.css({
 					height : $pageHeight
-				});	
+				});
 			}
 			else {
 				$sections.css({
 					height : 'auto'
-				});	
-			}			
+				});
+			}
 		}
 
     return {
@@ -38,14 +39,15 @@ USSE.navigation = USSE.navigation || (function() {
 
 
 USSE.graph = USSE.graph || (function() {
+	'use strict';
 	function init() {
 		$('#chart svg').remove();
-		var w = $(window).width() -2, h = $('section.panel').eq(0).height();
-		
-		var vertices = d3.range(80).map(function(d) {
+		var w = $(window).width() -2, h = $('section.block').eq(0).height();
+
+		var vertices = d3.range(80).map(function() {
 			return [Math.random() * w, Math.random() * h];
 		});
-		
+
 		svg = d3.select('#chart')
 			.append('svg:svg')
 			.attr('width', w)
@@ -53,25 +55,25 @@ USSE.graph = USSE.graph || (function() {
 			.attr('class', 'PiYG')
 			.on('mousemove', update);
 
-		svg.selectAll("path")
+		svg.selectAll('path')
 			.data(d3.geom.voronoi(vertices))
-			.enter().append("svg:path")
-			.attr("class", function(d, i) { return i ? "q" + (i % 9) + "-9" : null; })
-			.attr("d", function(d) { return "M" + d.join("L") + "Z"; });
-											 
-		svg.selectAll("circle")
+			.enter().append('svg:path')
+			.attr('class', function(d, i) { return i ? 'q' + (i % 9) + '-9' : null; })
+			.attr('d', function(d) { return 'M' + d.join('L') + 'Z'; });
+
+		svg.selectAll('circle')
 			.data(vertices.slice(1))
-			.enter().append("svg:circle")
-			.attr("transform", function(d) { return "translate(" + d + ")"; })
-			.attr("r", 2);
-											 
+			.enter().append('svg:circle')
+			.attr('transform', function(d) { return 'translate(' + d + ')'; })
+			.attr('r', 2);
+
 		function update() {
 			vertices[0] = d3.svg.mouse(this);
-			svg.selectAll("path")
+			svg.selectAll('path')
 				.data(d3.geom.voronoi(vertices)
-				.map(function(d) { return "M" + d.join("L") + "Z"; }))
-				.filter(function(d) { return this.getAttribute("d") != d; })
-				.attr("d", function(d) { return d; });
+				.map(function(d) { return 'M' + d.join('L') + 'Z'; }))
+				.filter(function(d) { return this.getAttribute('d') !== d; })
+				.attr('d', function(d) { return d; });
 			}
 	}
 
@@ -95,8 +97,3 @@ $(window).resize(function() {
 	USSE.navigation.resize();
 	USSE.graph.init();
 });
-
-
-
-
-

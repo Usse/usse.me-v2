@@ -18,7 +18,7 @@ USSE.navigation = USSE.navigation || (function() {
 		}
 		function setHeight() {
 			if (!Modernizr.mq('only screen and (max-width:768px)')) {
-				$sections.css({
+				$sections.eq(0).css({
 					height : $pageHeight
 				});
 			}
@@ -44,7 +44,7 @@ USSE.graph = USSE.graph || (function() {
 		$('#chart svg').remove();
 		var w = $(window).width() -2, h = $('section.block').eq(0).height();
 
-		var vertices = d3.range(80).map(function() {
+		var vertices = d3.range(100).map(function() {
 			return [Math.random() * w, Math.random() * h];
 		});
 
@@ -74,11 +74,19 @@ USSE.graph = USSE.graph || (function() {
 				.map(function(d) { return 'M' + d.join('L') + 'Z'; }))
 				.filter(function(d) { return this.getAttribute('d') !== d; })
 				.attr('d', function(d) { return d; });
-			}
+        }
 	}
 
+    var resize  =
+        debounce(function() {
+            console.log('Woooooo');
+            USSE.graph.init();
+        }, 50);
+
+
 	return {
-		init : init
+		init : init,
+        resize : resize
 	}
 }());
 
@@ -95,5 +103,6 @@ $(document).ready(function() {
 
 $(window).resize(function() {
 	USSE.navigation.resize();
-	USSE.graph.init();
+    USSE.graph.resize();
+
 });

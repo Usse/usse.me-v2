@@ -18,7 +18,7 @@ USSE.navigation = USSE.navigation || (function() {
 		}
 		function setHeight() {
 			if (!Modernizr.mq('only screen and (max-width:768px)')) {
-				$sections.eq(0).css({
+				$sections.css({
 					height : $pageHeight
 				});
 			}
@@ -79,7 +79,6 @@ USSE.graph = USSE.graph || (function() {
 
     var resize  =
         debounce(function() {
-            console.log('Woooooo');
             USSE.graph.init();
         }, 50);
 
